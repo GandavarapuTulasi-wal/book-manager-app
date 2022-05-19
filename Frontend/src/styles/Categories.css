@@ -1,0 +1,29 @@
+.categories {
+  color: white;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: transparent;
+  padding: 0px;
+  margin: 0px;
+}
+.active-category {
+  font-weight: bold;
+  border-bottom: 2px solid #fff;
+}
+.btn:focus,
+.btn:active {
+  outline: none !important;
+  box-shadow: none;
+}
+.categories button:hover {
+  font-weight: bold;
+}
+.category-container {
+  background-color: rgb(49, 57, 82);
+  padding: 4px;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,164 @@
+.App {
+  color: #444444;
+}
+#list {
+  display: none;
+}
+
+body {
+  background: linear-gradient(to bottom, #31ad88, #fff);
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100%;
+}
+.clearfix::after {
+  content: '';
+  clear: both;
+  display: table;
+}
+.clearfix {
+  overflow: auto;
+}
+#logged-person {
+  display: inline;
+  margin: 5px;
+}
+#add-products,
+#logout-btn {
+  display: none;
+}
+.header-blue {
+  background-color: rgb(6, 3, 32);
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.header-blue .navbar {
+  background: transparent;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  color: #fff;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+}
+
+.header-blue .navbar .navbar-brand {
+  font-size: 2rem;
+  font-weight: bold;
+  color: inherit;
+  padding: 0px;
+}
+
+.header-blue .navbar .navbar-brand:hover {
+  color: #f0f0f0;
+}
+
+.header-blue .navbar .navbar-collapse {
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .header-blue .navbar .navbar-collapse {
+    border-color: transparent;
+    margin: 0;
+  }
+}
+
+.header-blue .navbar .navbar-collapse span .login {
+  color: #d9d9d9;
+  margin-right: 0.5rem;
+  text-decoration: none;
+}
+
+.header-blue .navbar .navbar-collapse span .login:hover {
+  color: #fff;
+}
+
+.header-blue .navbar .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.header-blue .navbar .navbar-toggler:hover,
+.header-blue .navbar-toggler:focus {
+  background: none;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active {
+  outline: none !important;
+  box-shadow: none;
+}
+.header-blue .navbar .navbar-nav a.active,
+.header-blue .navbar .navbar-nav > .show .dropdown-item {
+  background: none;
+  box-shadow: none;
+}
+@media (min-width: 768px) {
+  .header-blue .navbar-nav .nav-link {
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .header-blue .navbar-nav .nav-link {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+}
+
+.header-blue .action-button,
+.header-blue .action-button:not(.disabled):active {
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  color: #ebeff1;
+  box-shadow: none;
+  text-shadow: none;
+  padding: 0.3rem 0.8rem;
+  background: transparent;
+  transition: background-color 0.25s;
+  outline: none;
+}
+.nav-link:hover {
+  border-radius: 15px;
+  border-top: 2px solid white;
+}
+.header-blue .action-button:hover {
+  color: #000;
+  background-color: white;
+}
+
+.base {
+  width: 100%;
+}
+
+.error {
+  color: red;
+  font-weight: 500;
+}
+.book-image {
+  height: 250px;
+}
+.nav-item {
+  color: #fff;
+  font-weight: 600;
+}
+.login-container {
+  background-image: url('library.jpeg');
+  background-size: cover;
+  height: 100vh;
+  background-repeat: no-repeat;
+  color: #000;
+}
+.login-form-container {
+  background-color: #ffffff;
+  width: 450px;
+  border-radius: 5px;
+  padding: 20px;
+  height: 350px;
+}
+.login-heading {
+  color: rgb(4, 10, 43);
+}
