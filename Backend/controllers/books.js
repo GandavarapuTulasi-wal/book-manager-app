@@ -153,7 +153,7 @@ exports.deleteBook = [
     }
   },
 ];
-cron.schedule('0 19 * * * ', async () => {
+cron.schedule('0 0 19 * * * ', async () => {
   console.log('corn job is scheduled to add books on everyday at 7 PM');
   const newBook = {
     title: 'filename',
