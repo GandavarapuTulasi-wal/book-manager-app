@@ -8,6 +8,7 @@
 /* eslint-disable indent */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-restricted-globals */
+/* eslint-disable react/jsx-one-expression-per-line */
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -87,6 +88,7 @@ function Books() {
                       {val.author}
                     </CardSubtitle>
                     <CardText className="text-center">{val.subject}</CardText>
+                    <CardText className="text-center">₹{val.price}</CardText>
                     <div className="d-flex justify-content-center ">
                       <Button
                         color="danger"

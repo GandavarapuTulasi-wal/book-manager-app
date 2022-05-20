@@ -11,22 +11,19 @@
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Form, FormGroup, Button, Input, Spinner } from 'reactstrap';
+import { Form, FormGroup, Button, Input, Spinner, FormText } from 'reactstrap';
 import './App.css';
 import axios from 'axios';
 
 export default function Login() {
   const navigate = useNavigate();
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
   const formik = useFormik({
     initialValues: {
       username: '',
       password: '',
     },
     async onSubmit(values) {
-      const spinner = document.querySelector('#loading-spinner');
-      setLoading(true);
       await axios
         .post('/users/login', {
           username: values.username,
@@ -41,8 +38,6 @@ export default function Login() {
           document.querySelector('#list').style.display = 'block';
           document.querySelector('#login-btn').style.display = 'none';
           document.querySelector('#logout-btn').style.display = 'inline';
-          setLoading(false);
-          setLoading(false);
           alert('Login successfull');
           navigate('/');
         })
@@ -50,7 +45,6 @@ export default function Login() {
           console.log(errors.response.data.error);
           setError(errors.response.data.error);
         });
-      setLoading(false);
     },
     validate() {
       const errors = {};
@@ -79,10 +73,12 @@ export default function Login() {
             value={formik.values.username}
             placeholder="Enter username"
             className="mb-2"
+            invalid={formik.errors.username && formik.touched.username}
+            required
           />
-          <p className="text-danger">
-            {formik.errors.username ? formik.errors.username : null}
-          </p>
+          {formik.touched.username && formik.errors.username && (
+            <FormText color="danger">{formik.errors.username}</FormText>
+          )}
         </FormGroup>
         <FormGroup>
           <Input
@@ -92,10 +88,12 @@ export default function Login() {
             value={formik.values.password}
             placeholder="Enter password"
             className="mb-2"
+            invalid={formik.errors.password && formik.touched.password}
+            required
           />
-          <p className="text-danger">
-            {formik.errors.password ? formik.errors.password : null}
-          </p>
+          {formik.touched.password && formik.errors.password && (
+            <FormText color="danger">{formik.errors.password}</FormText>
+          )}
         </FormGroup>
         <FormGroup className="text-right">
           <Button color="primary" type="submit" className="w-50 mb-2">
@@ -106,7 +104,6 @@ export default function Login() {
           <div id="error-status" className="text-center text-danger">
             <p>{error}</p>
           </div>
-          {loading ? <Spinner>Loading...</Spinner> : ''}
         </div>
       </Form>
     </div>

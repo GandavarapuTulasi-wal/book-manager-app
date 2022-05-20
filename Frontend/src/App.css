@@ -136,7 +136,6 @@ body {
 
 .error {
   color: red;
-  font-weight: 500;
 }
 .book-image {
   height: 250px;
@@ -154,10 +153,10 @@ body {
 }
 .login-form-container {
   background-color: #ffffff;
-  width: 450px;
   border-radius: 5px;
   padding: 20px;
-  height: 350px;
+  width: 450px;
+  height: 300px;
 }
 .login-heading {
   color: rgb(4, 10, 43);

@@ -34,7 +34,7 @@ function EditBook(props) {
   const [subject, setSubject] = useState();
   const [category, setCategory] = useState();
   const [categorydata, setCategorydata] = useState([]);
-  const [finalCat, setFinalCat] = useState(1);
+  const [finalCat, setFinalCat] = useState();
   const [error, setError] = useState(false);
   const urlParams = useParams();
   const { edit, setEdit } = props;

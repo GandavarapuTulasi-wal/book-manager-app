@@ -8,6 +8,7 @@
 /* eslint-disable arrow-body-style */
 /* eslint-disable no-shadow */
 /* eslint-disable operator-linebreak */
+/* eslint-disable react/jsx-no-duplicate-props */
 
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
@@ -21,6 +22,7 @@ import {
   FormGroup,
   Button,
   Input,
+  FormText,
 } from 'reactstrap';
 import BookContext from './BookContext';
 
@@ -42,7 +44,7 @@ export default function AddBook(props) {
       price: '',
       subject: '',
       author: '',
-      category_id: '1',
+      category_id: '',
       availability: '1',
       image: '',
     },
@@ -58,7 +60,7 @@ export default function AddBook(props) {
       formData.append('availability', values.availability);
 
       console.log(formData);
-      // Posting the product data to the backend
+      // Posting the book data to the backend
 
       try {
         const res = axios.post('/books', formData, {
@@ -110,7 +112,7 @@ export default function AddBook(props) {
       .catch((error) => console.log(error));
   }, []);
   return (
-    <Modal isOpen={toggle} fullscreen className="h-auto">
+    <Modal isOpen={toggle} className="h-auto">
       <Form
         onSubmit={formik.handleSubmit}
         noValidate
@@ -120,7 +122,7 @@ export default function AddBook(props) {
           Add Book
         </ModalHeader>
         <ModalBody>
-          <div className="card mx-auto col-lg-4 col-md-6 p-4">
+          <div className="card mx-auto p-4">
             <FormGroup>
               <Input
                 required
@@ -130,38 +132,40 @@ export default function AddBook(props) {
                 placeholder="Enter title Name"
                 onChange={formik.handleChange}
                 value={formik.values.title}
+                invalid={formik.errors.title && formik.touched.title}
+                required
               />
-              <p className="text-danger">
-                {formik.errors.title ? formik.errors.title : null}
-              </p>
+              {formik.touched.title && formik.errors.title && (
+                <FormText color="danger">{formik.errors.title}</FormText>
+              )}
             </FormGroup>
             <FormGroup>
               <Input
                 required
                 type="text"
                 name="author"
-                className="form-control my-3  mx-auto"
+                className="form-control my-1  mx-auto"
                 placeholder="Enter author Name"
                 onChange={formik.handleChange}
                 value={formik.values.author}
+                required
+                invalid={formik.errors.author && formik.touched.author}
               />
-              <p className="text-danger">
-                {formik.errors.author ? formik.errors.author : null}
-              </p>
+              {formik.touched.author && formik.errors.author && (
+                <FormText color="danger">{formik.errors.author}</FormText>
+              )}
             </FormGroup>
             <FormGroup>
               <Input
                 required
                 type="number"
                 name="price"
-                className="my-3 mx-auto"
+                className="my-1 mx-auto"
                 placeholder="Enter Product Price"
                 onChange={formik.handleChange}
                 value={formik.values.price}
+                required
               />
-              <p className="text-danger">
-                {formik.errors.price ? formik.errors.price : null}
-              </p>
             </FormGroup>
             <FormGroup>
               <Input
@@ -169,11 +173,12 @@ export default function AddBook(props) {
                 type="file"
                 accept="image/*"
                 name="image"
-                className="my-3 mx-auto"
+                className="my-1 mx-auto"
                 id="file_input"
                 onChange={(e) => {
                   formik.setFieldValue('image', e.currentTarget.files[0]);
                 }}
+                required
               />
             </FormGroup>
             <FormGroup>
@@ -181,9 +186,10 @@ export default function AddBook(props) {
                 type="select"
                 required
                 name="category"
-                className="my-3 mx-auto"
+                className="my-1 mx-auto"
                 onChange={formik.handleChange}
                 value={formik.values.category}
+                required
               >
                 <option>Select category</option>
                 {category.map((val) => {
@@ -196,9 +202,10 @@ export default function AddBook(props) {
                 required
                 type="select"
                 name="availability"
-                className="my-3 mx-auto"
+                className="my-1 mx-auto"
                 onChange={formik.handleChange}
                 value={formik.values.availability}
+                required
               >
                 <option value="1">available</option>
                 <option value="0">not available</option>
@@ -208,15 +215,17 @@ export default function AddBook(props) {
               <Input
                 type="textarea"
                 required
-                className="my-3 mx-auto"
+                className="my-1 mx-auto"
                 placeholder="Enter Subject of the Book......"
                 name="subject"
                 onChange={formik.handleChange}
                 value={formik.values.subject}
+                required
+                invalid={formik.errors.subject && formik.touched.subject}
               />
-              <p className="text-danger">
-                {formik.errors.subject ? formik.errors.subject : null}
-              </p>
+              {formik.touched.subject && formik.errors.subject && (
+                <FormText color="danger">{formik.errors.subject}</FormText>
+              )}
             </FormGroup>
             <FormGroup className="text-center">
               <Button color="primary" type="submit">

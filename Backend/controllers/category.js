@@ -14,8 +14,15 @@ exports.addCategory = [
   authenticationmiddleware,
   async (req, res) => {
     try {
-      await category.create(req.body);
-      return res.send({ status: 200, data: 'category created successfully' });
+      const findCategory = await category.findOne({
+        where: { category_name: req.body.category_name },
+      });
+      if (findCategory) {
+        res.send({ status: 400, data: 'category already exit' });
+      } else {
+        await category.create(req.body);
+        return res.send({ status: 200, data: 'category created successfully' });
+      }
     } catch (error) {
       return res.send({ status: 500, data: error.message });
     }

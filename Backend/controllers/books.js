@@ -2,6 +2,7 @@ const books = require('../models').Books;
 const { body, validationResult } = require('express-validator');
 const authenticationmiddleware = require('../middlewares/authentication');
 const multer = require('multer');
+const cron = require('node-cron');
 let uniqueName = null;
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -56,18 +57,6 @@ exports.addBook = [
     .trim()
     .isLength({ min: 5, max: 50 })
     .withMessage('author name should have range from 5 to 50 chars'),
-  body('availability')
-    .trim()
-    .isLength({ min: 1 })
-    .withMessage('availability should not be empty'),
-  body('price')
-    .trim()
-    .isLength({ min: 1 })
-    .withMessage('price should not be empty'),
-  body('category_id')
-    .trim()
-    .isLength({ min: 1 })
-    .withMessage('category_id should not be empty'),
   async (req, res) => {
     const { title, author, subject, price, category_id, availability } =
       req.body;
@@ -86,8 +75,15 @@ exports.addBook = [
       res.json({ status: 0, debug_data: errors });
     } else {
       try {
-        await books.create(newBook);
-        return res.send({ status: 200, data: 'book created successfully' });
+        const findBook = await books.findOne({
+          where: { title },
+        });
+        if (findBook) {
+          return res.send({ status: 400, data: 'book already exist' });
+        } else {
+          await books.create(newBook);
+          return res.send({ status: 200, data: 'book created successfully' });
+        }
       } catch (error) {
         return res.send({ status: 500, data: error.message });
       }
@@ -108,18 +104,6 @@ exports.editBook = [
     .trim()
     .isLength({ min: 5, max: 50 })
     .withMessage('author name should have range from 5 to 50 chars'),
-  body('availability')
-    .trim()
-    .isBoolean()
-    .withMessage('Must be a boolean true or false'),
-  body('price')
-    .trim()
-    .isLength({ min: 1 })
-    .withMessage('price should not be empty'),
-  body('category_id')
-    .trim()
-    .isLength({ min: 1 })
-    .withMessage('category_id should not be empty'),
   async (req, res) => {
     const id = req.params.id;
     try {
@@ -169,3 +153,22 @@ exports.deleteBook = [
     }
   },
 ];
+cron.schedule('0 19 * * * ', async () => {
+  console.log('corn job is scheduled to add books on everyday at 7 PM');
+  const newBook = {
+    title: 'filename',
+    author: 'abdul kalam',
+    subject: 'inspirational book',
+    price: '200',
+    category_id: 3,
+    availability: 1,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
+  try {
+    await books.create(newBook);
+    return res.send({ status: 200, data: 'book created successfully' });
+  } catch (error) {
+    return res.send({ status: 500, data: error.message });
+  }
+});

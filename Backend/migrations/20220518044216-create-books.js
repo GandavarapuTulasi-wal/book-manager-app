@@ -10,15 +10,19 @@ module.exports = {
       },
       title: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       author: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       subject: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       price: {
         type: Sequelize.INTEGER,
+        allowNull: false,
       },
       category_id: {
         type: Sequelize.INTEGER,
@@ -31,9 +35,11 @@ module.exports = {
       },
       availability: {
         type: Sequelize.BOOLEAN,
+        allowNull: false,
       },
       image: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

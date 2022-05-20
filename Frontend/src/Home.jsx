@@ -1,11 +1,10 @@
-import React, { useContext } from 'react';
+/* eslint-disable linebreak-style */
+import React from 'react';
 
 import BooksContainer from './BooksContainer';
-import BookContext from './BookContext';
 import Categories from './Categories';
 
 export default function Home() {
-  const { stateStatus } = useContext(BookContext);
   return (
     <div>
       <Categories />
